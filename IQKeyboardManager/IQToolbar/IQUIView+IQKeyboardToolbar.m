@@ -287,7 +287,7 @@
         }
     }
     
-	NSMutableArray *items = [[NSMutableArray alloc] init];
+    NSMutableArray *items = [[NSMutableArray alloc] init];
     
     //Title button
     IQTitleBarButtonItem *title = [[IQTitleBarButtonItem alloc] initWithTitle:self.shouldHidePlaceholderText?nil:titleText];
@@ -298,6 +298,11 @@
     
     //Right button
     IQBarButtonItem *doneButton =[[IQBarButtonItem alloc] initWithTitle:text style:UIBarButtonItemStyleDone target:target action:action];
+    /*
+    // 换用 IQTitleBarButtonItem 。。 显示不出来
+    IQTitleBarButtonItem *doneButton =[[IQTitleBarButtonItem alloc] initWithTitle:text];
+    [doneButton setTitleTarget:target action:action]; // 放到toolbar.titleInvocation = self.titleInvocation;之后再加。。还是不行
+     */
     [items addObject:doneButton];
     
     //  Adding button to toolBar.

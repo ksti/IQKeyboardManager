@@ -29,4 +29,9 @@
  */
 @interface IQBarButtonItem : UIBarButtonItem
 
+/**
+ overWrite initWithTitle.
+ */
+- (nonnull instancetype)initWithTitle:(nullable NSString *)title style:(UIBarButtonItemStyle)style target:(nullable id)target action:(nullable SEL)action;
+
 @end

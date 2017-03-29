@@ -24,8 +24,11 @@
 #import "IQTitleBarButtonItem.h"
 #import "IQKeyboardManagerConstants.h"
 #import "IQKeyboardManagerConstantsInternal.h"
+#import "IQNSString+NSAttributedString.h"
+
 #import <UIKit/UILabel.h>
 #import <UIKit/UIButton.h>
+#import <UIKit/NSAttributedString.h>
 
 @implementation IQTitleBarButtonItem
 {
@@ -77,7 +80,12 @@
 -(void)setTitle:(NSString *)title
 {
     [super setTitle:title];
-    [_titleButton setTitle:title forState:UIControlStateNormal];
+    NSAttributedString *attributedTitle = [title attributedString];
+    if (attributedTitle) {
+      [_titleButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+    } else {
+      [_titleButton setTitle:title forState:UIControlStateNormal];
+    }
 }
 
 -(void)setSelectableTextColor:(UIColor*)selectableTextColor

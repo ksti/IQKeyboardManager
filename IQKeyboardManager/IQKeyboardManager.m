@@ -33,6 +33,7 @@
 #import "IQUITextFieldView+Additions.h"
 #import "IQUIViewController+Additions.h"
 #import "IQPreviousNextView.h"
+#import "IQNSString+NSAttributedString.h"
 
 #import <UIKit/UINavigationBar.h>
 #import <UIKit/UITapGestureRecognizer.h>

@@ -23,8 +23,34 @@
 
 #import "IQBarButtonItem.h"
 #import "IQKeyboardManagerConstantsInternal.h"
+#import "IQNSString+NSAttributedString.h"
 
 @implementation IQBarButtonItem
+
+/**
+ overWrite initWithTitle.
+ */
+- (nonnull instancetype)initWithTitle:(nullable NSString *)title style:(UIBarButtonItemStyle)style target:(nullable id)target action:(nullable SEL)action {
+    IQBarButtonItem *buttonItem = [super initWithTitle:title style:style target:target action:action];
+    NSAttributedString *attributedTitle = [title attributedString];
+    if (attributedTitle) {
+        NSDictionary *attributeDict;
+        NSRange effectiveRange = { 0, 0 };
+        NSRange range;
+        range = NSMakeRange (NSMaxRange(effectiveRange),
+                             [attributedTitle length] - NSMaxRange(effectiveRange));
+        attributeDict = [attributedTitle attributesAtIndex: range.location
+                            longestEffectiveRange: &effectiveRange
+                                          inRange: range];
+        NSLog (@"Range: %@  Attributes: %@",
+               NSStringFromRange(effectiveRange), attributeDict);
+        if (attributeDict) {
+          [buttonItem setTitleTextAttributes:attributeDict forState:UIControlStateNormal];
+        }      
+    }
+  
+    return buttonItem;
+}
 
 +(void)load
 {
